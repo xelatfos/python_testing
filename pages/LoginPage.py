@@ -1,6 +1,7 @@
 from selene import config, browser
 from selene.support.jquery_style_selectors import s
 
+from domain.user import User
 from pages.MainPage import MainPage
 
 
@@ -9,8 +10,9 @@ class LoginPage(object):
         self.login_inp = s("input[name='user']")
         self.passw_inp = s("input[name='pass']")
         self.login_btn = s("input[type=submit]")
+
     def open(self):
-        browser.open_url("http://localhost/addressbook/")
+        browser.open_url("/addressbook/")
         return self
 
     def login_as(self, user):
