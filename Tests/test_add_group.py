@@ -1,18 +1,20 @@
+import pytest
 from selene.support.conditions import have
 
 from domain.group import Group
 from domain.user import User
-from pages.LoginPage import LoginPage
-from pages.MainPage import MainPage
+from pages.application import Application
 
-
-def test_add_group():
+@pytest.fixture
+def app(request):
+    fixture = Application()
+    request.addfinalizer(fixture.destroy)
+    return fixture
+def test_add_group(app):
     admin = User("admin", "secret", "(admin)")
-    (LoginPage().
-     open().
-     login_as(admin).ava_txt.
+    (app.main_page.ava_txt.
      should(have.exact_text(admin.fullName))
      )
     group = Group("name", "header", "footer")
-    MainPage().group_create(group)
+    app.main_page.group_create(group)
     # MainPage().logout()

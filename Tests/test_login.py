@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 import pytest
 from selene.api import *
-from selene.browser import *
+from selene import config, browser
 # pytest -sv tests --tb=short
 from pages.LoginPage import LoginPage
 from domain.user import User
 from pages.MainPage import MainPage
 
-# @pytest.mark.skip
+@pytest.mark.skip
 def test_admin_login(admin = User("admin", "secret", "(admin)")):
    (LoginPage().
     open().
