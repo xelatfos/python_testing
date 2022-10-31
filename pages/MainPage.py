@@ -20,14 +20,18 @@ class MainPage(object):
         self.chk_grp_first = s("[name='selected[]']")
         self.chk_grp_all = ss("[name='selected[]']")
         self.grp_head = s("div[id='content'] h1")
+        self.btn_grp_update = s("[name='update']")
         self.grp_msg = s(".msgbox")
+    def fill_grp(self, group):
+        self.grp_name.set(group.name)
+        self.grp_header.set(group.header)
+        self.grp_footer.set(group.footer)
+
     def group_create(self, group):
         self.menu_groups.click()
         self.btn_add_group.click()
         self.grp_head.should(have.exact_text("Groups"))
-        self.grp_name.set(group.name)
-        self.grp_header.set(group.header)
-        self.grp_footer.set(group.footer)
+        self.fill_grp(group)
         self.btn_grp_enter.click()
         self.grp_msg.should(have.text("A new group has been entered into the address book."))
         return self
