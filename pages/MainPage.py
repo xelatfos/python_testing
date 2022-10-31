@@ -1,5 +1,5 @@
 from selene.support.conditions import have
-from selene.support.jquery_style_selectors import s
+from selene.support.jquery_style_selectors import s, ss
 
 from domain import user, group
 
@@ -17,6 +17,8 @@ class MainPage(object):
         self.grp_header = s("[name='group_header']")
         self.grp_footer = s("[name='group_footer']")
         self.btn_grp_enter = s("[name='submit']")
+        self.chk_grp_first = s("[name='selected[]']")
+        self.chk_grp_all = ss("[name='selected[]']")
         self.grp_head = s("div[id='content'] h1")
         self.grp_msg = s(".msgbox")
     def group_create(self, group):

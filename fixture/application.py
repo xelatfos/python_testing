@@ -3,6 +3,7 @@ from selene.support.conditions import have
 from selene.support.jquery_style_selectors import s
 
 from domain.user import User
+from fixture.session import SessionHelper
 from pages.MainPage import MainPage
 
 class Application(object):
@@ -11,8 +12,10 @@ class Application(object):
         self.login_inp = s("input[name='user']")
         self.passw_inp = s("input[name='pass']")
         self.login_btn = s("input[type=submit]")
-        # browser.open_url("/addressbook/")
-        self.main_page = self.admin_login()
+        self.browser = browser
+        self.browser.open_url("/addressbook/")
+        self.main_page = MainPage()
+        self.session = SessionHelper(self)
     def open(self):
         browser.open_url("/addressbook/")
         return self
@@ -32,4 +35,5 @@ class Application(object):
             browser.take_screenshot()
        return MainPage()
     def destroy(self):
+        #pass
         browser.close()
