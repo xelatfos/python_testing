@@ -17,7 +17,7 @@ class Application(object):
         self.main_page = MainPage()
         self.session = SessionHelper(self)
     def open(self):
-        browser.open_url("/addressbook/")
+        self.browser.open_url("/addressbook/")
         return self
 
     def login_as(self, user):
@@ -32,8 +32,15 @@ class Application(object):
         should(have.exact_text(admin.fullName))
         )
        if not browser.should(have.url("http://localhost/addressbook/")):
-            browser.take_screenshot()
+            self.browser.take_screenshot()
        return MainPage()
     def destroy(self):
         #pass
-        browser.close()
+        self.browser.close()
+
+    def is_valid(self):
+        try:
+            self.browser.driver().current_url
+            return True
+        except:
+            return False
