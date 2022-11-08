@@ -1,6 +1,8 @@
+import allure
 import pytest
 from fixture.application import Application
 fixture = None
+@allure.suite("Addressbook testing suite")
 @pytest.fixture(scope = "session")
 def app(request):
     global fixture
@@ -12,6 +14,7 @@ def app(request):
         fixture.admin_login()
 
     return fixture
+
 @pytest.fixture(scope = "session", autouse=True)
 def stop(request):
     fixture = Application()
