@@ -3,6 +3,9 @@ import pytest
 from selene.support.conditions import have
 from model.user import User
 from random import randrange
+
+
+@allure.description("Deleting a group description")
 def test_del_group(app):
     with allure.step("Deleting a group"):
         gr_num = app.main_page.grp_cnt().chk_grp_cnt
