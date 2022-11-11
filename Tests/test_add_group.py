@@ -1,12 +1,26 @@
 import pytest
 import allure
+import random
+import string
+from model.group import Group
 
-from domain.group import Group
+from model.group import Group
 
+def rnd_str(pre, max_len):
+    sym = string.ascii_letters + string.digits  + " "*10 # + string.punctuation - known issue here
+    return pre.join(random.choice(sym) for i in range(random.randrange(max_len)))
 
-def test_add_groups(app):
-    with allure.step("Adding a new group"):
-        app.main_page.group_create(Group("name1", "header1", "footer1"))
-        app.main_page.group_create(Group("name", "header", "footer"))
-        app.main_page.group_create(Group("", "", ""))
+testdata = [
+    Group(name,head,foot)
+    for name in ["", rnd_str('name ', 10)]
+    for head in ["", rnd_str('head ', 10)]
+    for foot in ["", rnd_str('foot ', 10)]
+]
+
+@pytest.mark.parametrize('group', testdata, ids = [repr(x) for x in testdata])
+def test_add_groups(app, group):
+    with allure.step("Adding new groups"):
+        gr_num = app.main_page.grp_cnt().chk_grp_cnt
+        app.main_page.group_create(group)
+    assert app.main_page.grp_cnt().chk_grp_cnt == gr_num+1
     # MainPage().logout()

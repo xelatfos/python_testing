@@ -1,6 +1,6 @@
 from selene.support.conditions import have
 
-from domain.user import User
+from model.user import User
 from pages.MainPage import MainPage
 
 

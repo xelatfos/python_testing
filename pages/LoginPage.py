@@ -1,7 +1,7 @@
 from selene import config, browser
 from selene.support.jquery_style_selectors import s
 
-from domain.user import User
+from model.user import User
 from pages.MainPage import MainPage
 
 

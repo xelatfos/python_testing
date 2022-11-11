@@ -1,19 +1,21 @@
 import allure
 import pytest
 from selene.support.conditions import have
-from domain.user import User
-
+from model.user import User
+from random import randrange
 def test_del_group(app):
     with allure.step("Deleting a group"):
-        app.main_page.menu_groups.click()
-        app.main_page.chk_grp_first.click()
-        app.main_page.btn_del_group.click()
+        gr_num = app.main_page.grp_cnt().chk_grp_cnt
+        app.main_page.group_del(randrange(gr_num))
+        assert app.main_page.grp_cnt().chk_grp_cnt == gr_num -1
+
 
 
 def test_del_groups(app):
     with allure.step("Deleting all groups"):
-        app.main_page.menu_groups.click()
+        gr_num = app.main_page.grp_cnt().chk_grp_cnt
         # also we can use enumerate() here
-        for index, chk in zip(range(3), app.main_page.chk_grp_all):
+        for index, chk in zip(range(2), app.main_page.chk_grp_all):
             chk.click()
         app.main_page.btn_del_group.click()
+

@@ -2,12 +2,13 @@ from selene import config, browser
 from selene.support.conditions import have
 from selene.support.jquery_style_selectors import s
 
-from domain.user import User
+from model.user import User
 from fixture.session import SessionHelper
 from pages.MainPage import MainPage
 
 class Application(object):
     """fixture object"""
+
     def __init__(self):
         self.login_inp = s("input[name='user']")
         self.passw_inp = s("input[name='pass']")
