@@ -18,7 +18,7 @@ testdata = [
 def test_add_groups(app, group):
     gr_num = app.main_page.grp_cnt().chk_grp_cnt
     app.tid += 1
-    allure.dynamic.title(f".{app.tid} Adding a new group {repr(group)}")
+    allure.dynamic.title(f".{app.next_tid()} Adding a new group {repr(group)}")
     app.main_page.group_create(group)
     assert app.main_page.grp_cnt().chk_grp_cnt == gr_num+1
     # MainPage().logout()

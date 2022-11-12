@@ -18,6 +18,9 @@ class Application(object):
         self.main_page = MainPage()
         self.session = SessionHelper(self)
         self.tid = 0
+    def next_tid(self):
+        self.tid += 1
+        return str(self.tid).rjust(3,'0')
     def open(self):
         self.browser.open_url("/addressbook/")
         return self
