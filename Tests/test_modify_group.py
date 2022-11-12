@@ -5,12 +5,13 @@ import allure_pytest
 import pytest
 from conftest import fixture, app
 from model.group import Group
+from utils.rand import rnd_str
 
-testdata = [(Group("", "", "footer11"),lambda x : x*0),
-            (Group("name11", "", ""), lambda x: randrange(x)),
-            (Group("name11", "header11", "footer11"),lambda x: x//2),
+testdata = [(Group("", "", rnd_str('foot ', 10)),lambda x : x*0),
+            (Group(rnd_str('name ', 10), "", ""), lambda x: randrange(x)),
+            (Group(rnd_str('name ', 10), rnd_str('head ', 10), rnd_str('foot ', 10)),lambda x: x//2),
             (Group("", "", ""), lambda x: randrange(x)),
-            (Group("", "header11", ""),lambda x: x-1),
+            (Group("", rnd_str('head ', 10), ""),lambda x: x-1),
             ]
 
 @allure.sub_suite(f"Modifying random parametrized groups ")

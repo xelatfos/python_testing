@@ -1,15 +1,9 @@
 import pytest
-
 import allure
-import random
-import string
 from model.group import Group
 
 from model.group import Group
-
-def rnd_str(pre, max_len):
-    sym = string.ascii_letters + string.digits  + " "*10 # + string.punctuation - known issue here
-    return pre.join(random.choice(sym) for i in range(random.randrange(max_len)))
+from utils.rand import rnd_str
 
 testdata = [
     Group(name,head,foot)
