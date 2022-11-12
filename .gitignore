@@ -100,12 +100,15 @@ celerybeat.pid
 
 # SageMath parsed files
 *.sage.py
-
+# Selenit is not yet implemented
+.selenit
+selenit/
 # Environments
 .env
 .venv
 env/
 venv/
+
 ENV/
 env.bak/
 venv.bak/
