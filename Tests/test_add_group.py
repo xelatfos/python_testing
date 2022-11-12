@@ -18,11 +18,10 @@ testdata = [
     for foot in ["", rnd_str('foot ', 10)]
 ]
 
-@allure.suite("Adding new groups")
+@allure.suite("Adding a new parametrized groups with the full coverage")
 @pytest.mark.parametrize('group', testdata, ids = [repr(x) for x in testdata])
 def test_add_groups(app, group):
-    with allure.step("Adding new groups"):
-        gr_num = app.main_page.grp_cnt().chk_grp_cnt
-        app.main_page.group_create(group)
+    gr_num = app.main_page.grp_cnt().chk_grp_cnt
+    app.main_page.group_create(group)
     assert app.main_page.grp_cnt().chk_grp_cnt == gr_num+1
     # MainPage().logout()

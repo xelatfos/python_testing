@@ -5,13 +5,14 @@ from model.user import User
 from random import randrange
 
 
-
+@allure.suite("Deleting a random group")
 def test_del_group(app):
     with allure.step("Deleting a group"):
         gr_num = app.main_page.grp_cnt().chk_grp_cnt
         app.main_page.group_del(randrange(gr_num))
         assert app.main_page.grp_cnt().chk_grp_cnt == gr_num -1
 
+@allure.suite("Deleting all the rest groups")
 def test_del_groups(app):
     with allure.step("Deleting all groups"):
         gr_num = app.main_page.grp_cnt().chk_grp_cnt
