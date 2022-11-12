@@ -4,7 +4,7 @@ from selene.support.conditions import have
 from model.user import User
 from random import randrange
 
-
+@allure.suite("Groups testing")
 @allure.sub_suite("Deleting the groups")
 @allure.description("""
 Deleting a random group
