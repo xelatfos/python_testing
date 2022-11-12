@@ -19,7 +19,8 @@ testdata = [(Group("", "", rnd_str('foot ', 10)),lambda x : x*0),
 @pytest.mark.parametrize('group', testdata, ids = [repr(x[0]) for x in testdata])
 def test_modify_groups_random(app, group):
         gr_num = app.main_page.grp_cnt().chk_grp_cnt
-        allure.dynamic.title(f"#{gr_num} Modifying the group {repr(group)}")
+        app.tid+=1
+        allure.dynamic.title(f".{app.tid} Modifying the group {repr(group)}")
         app.main_page.group_mod(group[0],group[1](gr_num)) # first
         assert app.main_page.grp_cnt().chk_grp_cnt == gr_num
 

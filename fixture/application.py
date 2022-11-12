@@ -17,6 +17,7 @@ class Application(object):
         self.browser.open_url("/addressbook/")
         self.main_page = MainPage()
         self.session = SessionHelper(self)
+        self.tid = 0
     def open(self):
         self.browser.open_url("/addressbook/")
         return self
@@ -38,7 +39,6 @@ class Application(object):
     def destroy(self):
         #pass
         self.browser.close()
-
     def is_valid(self):
         try:
             self.browser.driver().current_url

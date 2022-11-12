@@ -2,7 +2,8 @@ import allure
 import pytest
 from fixture.application import Application
 fixture = None
-
+global ti
+ti=0
 @pytest.fixture(scope = "session")
 def app(request):
     global fixture
