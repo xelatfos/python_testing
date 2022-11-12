@@ -17,7 +17,7 @@ testdata = [
     for head in ["", rnd_str('head ', 10)]
     for foot in ["", rnd_str('foot ', 10)]
 ]
-@given
+
 @pytest.mark.parametrize('group', testdata, ids = [repr(x) for x in testdata])
 def test_add_groups(app, group):
     with allure.step("Adding new groups"):
