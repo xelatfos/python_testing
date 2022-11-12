@@ -2,7 +2,7 @@ import allure
 import pytest
 from fixture.application import Application
 fixture = None
-@allure.suite('Group testing')
+
 @pytest.fixture(scope = "session")
 def app(request):
     global fixture
@@ -23,6 +23,7 @@ def stop(request):
         fixture.destroy()
     request.addfinalizer(fin)
     return fixture
+
 def pytest_collection_modifyitems(items):
     """Modifies test items in place to ensure test modules run in a given order."""
     MODULE_ORDER = ["test_add_group", "test_modify_group", "test_del_group"]

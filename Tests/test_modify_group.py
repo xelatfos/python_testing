@@ -1,6 +1,7 @@
 from random import randrange
 
 import allure
+import allure_pytest
 import pytest
 from conftest import fixture, app
 from model.group import Group
@@ -11,6 +12,7 @@ testdata = [(Group("", "", "footer11"),lambda x : x*0),
             (Group("", "", ""), lambda x: randrange(x)),
             (Group("", "header11", ""),lambda x: x-1),
             ]
+
 @allure.sub_suite(f"Modifying random parametrized groups ")
 @pytest.mark.parametrize('group', testdata, ids = [repr(x[0]) for x in testdata])
 def test_modify_groups_random(app, group):
