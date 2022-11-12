@@ -11,11 +11,11 @@ testdata = [(Group("", "", "footer11"),lambda x : x*0),
             (Group("", "", ""), lambda x: randrange(x)),
             (Group("", "header11", ""),lambda x: x-1),
             ]
-@allure.suite("Modifying random parametrized groups ")
+@allure.sub_suite(f"Modifying random parametrized groups ")
 @pytest.mark.parametrize('group', testdata, ids = [repr(x[0]) for x in testdata])
 def test_modify_groups_random(app, group):
-    with allure.step("Modifying first group"):
+    with allure.step(f"Modifying {repr(group)} group"):
         gr_num = app.main_page.grp_cnt().chk_grp_cnt
         app.main_page.group_mod(group[0],group[1](gr_num)) # first
-    assert app.main_page.grp_cnt().chk_grp_cnt == gr_num
+        assert app.main_page.grp_cnt().chk_grp_cnt == gr_num
 

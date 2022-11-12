@@ -2,7 +2,7 @@ import allure
 import pytest
 from fixture.application import Application
 fixture = None
-@allure.suite("Addressbook testing suite")
+@allure.suite('Group testing')
 @pytest.fixture(scope = "session")
 def app(request):
     global fixture
