@@ -14,7 +14,7 @@ testdata = [(Group("", "", rnd_str('foot ', 10)),lambda x : x*0),
             (Group("", rnd_str('head ', 10), ""),lambda x: x-1),
             ]
 
-
+@allure.suite("Groups testing")
 @allure.sub_suite("Modifying random parametrized groups ")
 @pytest.mark.parametrize('group', testdata, ids = [repr(x[0]) for x in testdata])
 def test_modify_groups_random(app, group):

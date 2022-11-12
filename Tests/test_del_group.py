@@ -14,24 +14,24 @@ def test_del_group(app):
     allure.dynamic.title(f"Deletion a random group step")
     gr_num = app.main_page.grp_cnt().chk_grp_cnt
     app.main_page.group_del(randrange(gr_num))
-    assert app.main_page.grp_cnt().chk_grp_cnt == gr_num -1
+    assert app.main_page.grp_cnt().chk_grp_cnt == gr_num - 1
 
+@allure.suite("Groups testing")
 @allure.sub_suite("Deleting the groups")
 def test_del_groups(app):
     gr_num = app.main_page.grp_cnt().chk_grp_cnt
     # also we can use enumerate() here
-    allure.dynamic.title(f"Deletion of 5 groups step")
     for index, chk in zip(range(5), app.main_page.chk_grp_all):
+        allure.dynamic.title(f".{index}Deletion of {index} groups step")
         chk.click()
     app.main_page.btn_del_group.click()
     assert app.main_page.grp_cnt().chk_grp_cnt == gr_num - 5
-
+@allure.suite("Groups testing")
 @allure.sub_suite("Deleting the groups")
 def test_del_rest_groups(app):
     gr_num = app.main_page.grp_cnt().chk_grp_cnt
-    allure.dynamic.title(f"Deletion of rest {gr_num} groups step")
-    # also we can use enumerate() here
-    for chk in app.main_page.chk_grp_all:
+    for index, chk in enumerate(app.main_page.chk_grp_all):
+        allure.dynamic.title(f".{index} Deletion of rest {gr_num - index} group step")
         chk.click()
     app.main_page.btn_del_group.click()
     assert app.main_page.grp_cnt().chk_grp_cnt == 0
