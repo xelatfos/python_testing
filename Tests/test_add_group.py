@@ -11,7 +11,9 @@ testdata = [
     for head in ["", rnd_str('head ', 10)]
     for foot in ["", rnd_str('foot ', 10)]
 ]
-@allure.suite("Adding a new parametrized groups")
+
+@allure.suite("Groups testing")
+@allure.sub_suite("Adding a new parametrized groups")
 @pytest.mark.parametrize('group', testdata, ids = [repr(x) for x in testdata])
 def test_add_groups(app, group):
     gr_num = app.main_page.grp_cnt().chk_grp_cnt

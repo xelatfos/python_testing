@@ -5,18 +5,18 @@ from model.user import User
 from random import randrange
 
 
-@allure.suite("Deleting a random group")
+@allure.sub_suite("Deleting the groups")
 @allure.description("""
 Deleting a random group
 Checking the groups number after deletion
 """)
 def test_del_group(app):
-    with allure.step("Deleting a group"):
-        gr_num = app.main_page.grp_cnt().chk_grp_cnt
-        app.main_page.group_del(randrange(gr_num))
-        assert app.main_page.grp_cnt().chk_grp_cnt == gr_num -1
+    allure.dynamic.title(f"Deletion a random group step")
+    gr_num = app.main_page.grp_cnt().chk_grp_cnt
+    app.main_page.group_del(randrange(gr_num))
+    assert app.main_page.grp_cnt().chk_grp_cnt == gr_num -1
 
-@allure.suite("Deleting the groups")
+@allure.sub_suite("Deleting the groups")
 def test_del_groups(app):
     gr_num = app.main_page.grp_cnt().chk_grp_cnt
     # also we can use enumerate() here
@@ -26,7 +26,7 @@ def test_del_groups(app):
     app.main_page.btn_del_group.click()
     assert app.main_page.grp_cnt().chk_grp_cnt == gr_num - 5
 
-@allure.suite("Deleting the groups")
+@allure.sub_suite("Deleting the groups")
 def test_del_rest_groups(app):
     gr_num = app.main_page.grp_cnt().chk_grp_cnt
     allure.dynamic.title(f"Deletion of rest {gr_num} groups step")
