@@ -33,6 +33,7 @@ def test_del_rest_groups(app):
     gr_num = app.main_page.grp_cnt().chk_grp_cnt
     allure.dynamic.title(f".{app.next_tid()} Deletion of rest {gr_num} group step")
     for index, chk in enumerate(app.main_page.chk_grp_all):
-        chk.click()
+        if index<gr_num-1:
+            chk.click()
     app.main_page.btn_del_group.click()
-    assert app.main_page.grp_cnt().chk_grp_cnt == 0
+    assert app.main_page.grp_cnt().chk_grp_cnt == 1

@@ -1,9 +1,21 @@
+import json
+import os.path
+fixture = None
+target = None
 import allure
 import pytest
 from fixture.application import Application
-fixture = None
-global ti
-ti=0
+from fixture.db import DbFixture
+
+
+
+def load_config(file):
+    global target
+    if target is None:
+        config_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), file)
+        with open(config_file) as f:
+            target = json.load(f)
+    return target
 @pytest.fixture(scope = "session")
 def app(request):
     global fixture
@@ -24,6 +36,18 @@ def stop(request):
         fixture.destroy()
     request.addfinalizer(fin)
     return fixture
+@pytest.fixture(scope = "session")
+def db(request):
+    db_config = load_config(request.config.getoption('--target'))['db']
+    dbfixture = DbFixture(host=db_config['host'],
+                          name=db_config['name'],
+                          user=db_config['user'],
+                          password=db_config['password']
+                          )
+    def fin():
+        dbfixture.destroy()
+    request.addfinalizer(fin)
+    return dbfixture
 
 def pytest_collection_modifyitems(items):
     """Modifies test items in place to ensure test modules run in a given order."""
@@ -37,3 +61,6 @@ def pytest_collection_modifyitems(items):
             it for it in sorted_items if module_mapping[it] == module
         ]
     items[:] = sorted_items
+
+def pytest_addoption(parser):
+    parser.addoption("--target", action="store", default="target.json")
