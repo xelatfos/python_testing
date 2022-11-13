@@ -6,7 +6,7 @@ from model.group import Group
 from utils.rand import rnd_str
 
 testdata = [
-    Group(name,head,foot)
+    Group(name, head, foot)
     for name in ["", rnd_str('name ', 10)]
     for head in ["", rnd_str('head ', 10)]
     for foot in ["", rnd_str('foot ', 10)]
