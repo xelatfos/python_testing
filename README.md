@@ -5,6 +5,8 @@ educational and research purposes.
 It has no functional coverage at all, but it was meant to cover 
 some of the popular and uncommon testing approaches and techniques.
 
+![](lite.gif)
+
 ## Technology Stack:
 * Python
 * Selene
